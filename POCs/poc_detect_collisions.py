@@ -18,9 +18,6 @@ RED = (255, 0, 0)
 player_rect = pygame.Rect(50, 50, 50, 50)  # (x, y, width, height)
 obstacle_rect = pygame.Rect(200, 200, 100, 100)  # (x, y, width, height)
 
-# Velocidad de movimiento del jugador
-player_speed = 5
-
 # Bucle principal del juego
 running = True
 while running:
@@ -28,18 +25,11 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    # Obtener el estado de las teclas
-    keys = pygame.key.get_pressed()
+    # Obtener la posición del mouse
+    mouse_pos = pygame.mouse.get_pos()
 
-    # Actualizar la posición del jugador
-    if keys[pygame.K_LEFT]:
-        player_rect.x -= player_speed
-    if keys[pygame.K_RIGHT]:
-        player_rect.x += player_speed
-    if keys[pygame.K_UP]:
-        player_rect.y -= player_speed
-    if keys[pygame.K_DOWN]:
-        player_rect.y += player_speed
+    # Actualizar la posición del jugador con la posición del mouse
+    player_rect.center = mouse_pos
 
     # Verificar si hay colisión entre el jugador y el obstáculo
     collision = player_rect.colliderect(obstacle_rect)
